@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" type="text/css" href="styles.css">
+<link rel="stylesheet" type="text/css" href="../jQuery/jquery-ui-1.11.2.custom/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="../styles/pure-release-0.5.0/pure-min.css">
+<script src="../jQuery/jquery-1.11.1.min.js"></script>
+<script src="../jQuery/jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
+<title>Drown It</title>
+<meta charset = "UTF-8">
+<meta name = "description" content = "Drown It, a clone of the popular game Flood It">
+<meta name = "keywords" content = "drown it game, brock mcfarland, mcswagland, game development">
+<meta name = "author" content = "Brock McFarland">
+</head>
+<body>
+	<div class="pure-menu pure-menu-open pure-menu-horizontal">
+		<a class="pure-menu-heading" href = "../">McSwagland</a>
+	
+		<ul>
+			<li><a href="../">Home</a></li>
+			<li class="pure-menu-selected"><a href="#">Drown It</a></li>
+		</ul>
+	</div>
+	<a target = "_blank" href = "https://twitter.com/brockoli_93"><img src = "../images/twitter-logo.jpg" style = "width: 25px; height: 25px; position: absolute; top: 5px; right: 10px;" /></a>
+	<!--Goudy Stout is another possible font-->
+	<div id = "gameElements" style = "display:none;">
+		<!--<a href = ".." id = "backNav" style = "left: 5px; top: 5px; font-family: magneto; font-size: 2em; position:absolute;"><-Back</a>-->
+		<span style = "position:absolute; right: 15px; top: 35px;" id = "help">Having trouble?<br><a target = "_blank" href = "https://www.youtube.com/watch?v=r0bupVtxIUA">How To Play</a></span>
+		<div style = "position: absolute" id = "Dashboard">
+			<span style = "font-family: magneto; font-size: 2em; text-align: center;" id = "MoveCounter"><u>Moves</u><br><span id = "moves">0</span>/<span id = "MAX_MOVES">25</span></span>
+			<br>
+			<br>
+			<br>
+			<span style = "font-family: magneto;" id = "difficulty">
+				<input type = "radio" name = "difficulty" value = "5" checked = "checked" id = "easy">Easy<br>
+				<input type = "radio" name = "difficulty" value = "3" id = "medium">Medium<br>
+				<input type = "radio" name = "difficulty" value = "0" id = "hard">Hard<br>
+			</span>
+		</div>
+		<table class = "center">
+			<tbody id="board"/>
+		</table>
+		<table style = "border-spacing: 5px; position: relative; top: 20px; border: 1px solid grey;" class = "center">
+			<tr>
+				<td style="background-color:blue" class = "gamebutton" id = "blue"></td>
+				<td style="background-color:red" class = "gamebutton" id = "red"></td>
+				<td style="background-color:#4CBB17" class = "gamebutton" id="green"></td>
+			</tr>
+			<tr>
+				<td style="background-color:yellow" class = "gamebutton" id = "yellow"></td>
+				<td style="background-color:purple" class = "gamebutton" id = "purple"></td>
+				<td style="background-color:orange" class = "gamebutton" id = "orange"></td>
+			</tr>
+		</table>
+		<br>
+		<br>
+		<br>
+		<div style = "text-align:center;">
+			<button id = "newGame" class = "styled-button-8">New Game</button>
+			<button id = "tryAgain" class = "styled-button-8">Try Again</button>
+			<button id = "computerSolution" class = "styled-button-8">Show Solution</button>
+		</div>
+	</div>
+	<div id = "winningDialog" style = "display: none;"><p style = "text-align:center">You won in <span id="winningMoves"></span> moves.</p></div>
+	<div id = "losingDialog" style = "display: none;"><p style="text-align: center">You lost.</p></div>
+	<div id = "transitionDialog" style = "display: none;"><p style = "text-align: center">What would you like to do?</p></div>
+	<div id = "loadingDialog" style = "display:none;"><h1 style = "text-align: center">Loading</h1></div>
+</body>
+<script src="js/Main.js"></script>

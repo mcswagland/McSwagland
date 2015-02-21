@@ -1,0 +1,10 @@
+a	{color:LimeGreen;}
+html,body{
+	height:100%;
+}
+
+.day{
+	background-image: url(../mountain.jpg);
+	background-repeat: no-repeat; 
+	background-size: 100%;
+}
