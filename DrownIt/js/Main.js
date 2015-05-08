@@ -35,7 +35,6 @@
 		setTimeout(closeLoadingDialog, 0);
 		setTimeout(function(){$("#gameElements").css('display', 'inline');}, 0);
 		setTimeout(function(){$("#Dashboard").css("left", $("#board").position().left - $("#Dashboard").width() - $("#Dashboard").position().left - 50 + "px");}, 0);
-		//computerPlay(LEVELS_AHEAD);
 	});
 	
 	window.onresize = function(){
@@ -132,15 +131,12 @@
 					"Try Again": function () {
 						tryAgain();
 						$(this).dialog('close');
-						//callback(true);
 					},
 						"New Game": function () {
 						$(this).dialog('close');
 						openLoadingDialog();
 						setTimeout(newGame, 0);
 						setTimeout(closeLoadingDialog, 0);
-						//$(this).dialog('close');
-						//callback(false);
 					}
 				}
 			});
@@ -184,7 +180,6 @@
 	$("#newGame").click(function(){
 		clearInterval(timerEvent);
 		openLoadingDialog();
-		//setTimeout so that the execution stack will finish first and then call it(?) Gonna learn more about it.
 		setTimeout(newGame, 0);
 		setTimeout(closeLoadingDialog, 0);
 	});
@@ -278,14 +273,12 @@
 				"Try Again": function () {
 					tryAgain();
 					$(this).dialog('close');
-					//callback(true);
 				},
 					"New Game": function () {
 					$(this).dialog('close');
 					openLoadingDialog();
 					setTimeout(newGame, 0);
 					setTimeout(closeLoadingDialog, 0);
-					//callback(false);
 				}
 			}
 		});
@@ -329,9 +322,7 @@
 				rowHtml += "<td id = '" + i + "-" + j + "' class = 'piece'></td>";
 			}
 			$("#row" + i).append(rowHtml);
-			//$("#board").append("</tr>");
 		}
-		$("#helper").html("hello there");
 	}
 	
 	function initializeBoard()
@@ -550,7 +541,6 @@
 			var maxScore = 0;
 			var bestMove = 0;
 			var highScoreLevel = finalLevel;
-			//go through each color. There are 6 colors. Maybe change 6 to a constant NUM_COLORS
 			for(var i = 0; i < NUM_COLORS; i++)
 			{
 				if(i != lastComputerMove)
@@ -617,15 +607,12 @@
 					"Try Again": function () {
 						tryAgain();
 						$(this).dialog('close');
-						//callback(true);
 					},
 						"New Game": function () {
 						$(this).dialog('close');
 						openLoadingDialog();
 						setTimeout(newGame, 0);
 						setTimeout(closeLoadingDialog, 0);
-						//$(this).dialog('close');
-						//callback(false);
 					}
 				}
 			});
