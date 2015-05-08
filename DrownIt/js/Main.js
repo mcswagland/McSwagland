@@ -147,20 +147,37 @@
 		}
 	});
 	
-	$("input:radio").click(function(){
-		if($("#easy").is(':checked'))
+	$("#DifficultyDropdown").change(function(){
+		if($("#easy").is(':selected'))
 		{
 			MAX_MOVES = computerMoves.length + Number($("#easy").val());
 		}
-		else if($("#medium").is(':checked'))
+		else if($("#medium").is(':selected'))
 		{
 			MAX_MOVES = computerMoves.length + Number($("#medium").val());
 		}
-		else if($("#hard").is(':checked'))
+		else if($("#hard").is(':selected'))
 		{
 			MAX_MOVES = computerMoves.length + Number($("#hard").val());
 		}
-		$("#MAX_MOVES").text(MAX_MOVES);
+		$(".MAX_MOVES").text(MAX_MOVES);
+		tryAgain();
+	});
+	
+	$("#MobileDifficultyDropdown").change(function(){
+		if($("#mobileEasy").is(':selected'))
+		{
+			MAX_MOVES = computerMoves.length + Number($("#mobileEasy").val());
+		}
+		else if($("#mobileMedium").is(':selected'))
+		{
+			MAX_MOVES = computerMoves.length + Number($("#mobileMedium").val());
+		}
+		else if($("#mobileHard").is(':selected'))
+		{
+			MAX_MOVES = computerMoves.length + Number($("#mobileHard").val());
+		}
+		$(".MAX_MOVES").text(MAX_MOVES);
 		tryAgain();
 	});
 	
@@ -216,19 +233,19 @@
 		computerPlay(LEVELS_AHEAD);
 		
 		tryAgain();
-		if($("#easy").is(':checked'))
+		if($("#easy").is(':selected'))
 		{
 			MAX_MOVES = computerMoves.length + Number($("#easy").val());
 		}
-		else if($("#medium").is(':checked'))
+		else if($("#medium").is(':selected'))
 		{
 			MAX_MOVES = computerMoves.length + Number($("#medium").val());
 		}
-		else if($("#hard").is(':checked'))
+		else if($("#hard").is(':selected'))
 		{
 			MAX_MOVES = computerMoves.length + Number($("#hard").val());
 		}
-		$("#MAX_MOVES").text(MAX_MOVES);
+		$(".MAX_MOVES").text(MAX_MOVES);
 	}
 	
 	function openLoadingDialog()
@@ -365,7 +382,7 @@
 			}
 		}
 		
-		$("#moves").text(numMoves);
+		$(".moves").text(numMoves);
 	}
 	
 	function numberToColor(number)

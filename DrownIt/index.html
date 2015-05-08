@@ -10,30 +10,54 @@
 <meta name = "description" content = "Drown It, a clone of the popular game Flood It">
 <meta name = "keywords" content = "drown it game, brock mcfarland, mcswagland, game development">
 <meta name = "author" content = "Brock McFarland">
+<meta name = "viewport" content = "width = device-width, initial-scale = 1.0"/>
 </head>
 <body>
 	<div class="pure-menu pure-menu-open pure-menu-horizontal">
 		<a class="pure-menu-heading" href = "../">McSwagland</a>
 	
-		<ul>
+		<ul id="siteSections">
 			<li><a href="../">Home</a></li>
 			<li class="pure-menu-selected"><a href="#">Drown It</a></li>
 		</ul>
 	</div>
-	<a target = "_blank" href = "https://twitter.com/brockoli_93"><img src = "../images/twitter-logo.jpg" style = "width: 25px; height: 25px; position: absolute; top: 5px; right: 10px;" /></a>
+	<a target = "_blank" id="twitterLink" href = "https://twitter.com/brockoli_93"><img src = "../images/twitter-logo.jpg" style = "width: 25px; height: 25px; position: absolute; top: 5px; right: 10px;" /></a>
 	<!--Goudy Stout is another possible font-->
+	<div id = "MobileDashboard" class="pure-g" style = "display: none; text-align:center;">
+		<div class="pure-u-1-2">
+		<span>Moves: <span class="moves">0</span>/<span class="MAX_MOVES">25</span></span>
+		</div>
+		<div class="pure-u-1-2">
+
+			<select id="MobileDifficultyDropdown">
+				<option value = "5" id = "mobileEasy">Easy</option>
+				<option value = "3" id = "mobileMedium">Medium</option>
+				<option value = "0" id = "mobileHard">Hard</option>
+			</select>
+
+		</div>
+	</div>
+	<br>
 	<div id = "gameElements" style = "display:none;">
-		<!--<a href = ".." id = "backNav" style = "left: 5px; top: 5px; font-family: magneto; font-size: 2em; position:absolute;"><-Back</a>-->
 		<span style = "position:absolute; right: 15px; top: 35px;" id = "help">Having trouble?<br><a target = "_blank" href = "https://www.youtube.com/watch?v=r0bupVtxIUA">How To Play</a></span>
 		<div style = "position: absolute" id = "Dashboard">
-			<span style = "font-family: magneto; font-size: 2em; text-align: center;" id = "MoveCounter"><u>Moves</u><br><span id = "moves">0</span>/<span id = "MAX_MOVES">25</span></span>
+			<span style = "font-family: magneto; font-size: 2em; text-align: center;" id = "MoveCounter"><u>Moves</u><br><span class = "moves">0</span>/<span class = "MAX_MOVES">25</span></span>
 			<br>
 			<br>
 			<br>
 			<span style = "font-family: magneto;" id = "difficulty">
-				<input type = "radio" name = "difficulty" value = "5" checked = "checked" id = "easy">Easy<br>
+				<!--<input type = "radio" name = "difficulty" value = "5" checked = "checked" id = "easy">Easy<br>
 				<input type = "radio" name = "difficulty" value = "3" id = "medium">Medium<br>
-				<input type = "radio" name = "difficulty" value = "0" id = "hard">Hard<br>
+				<input type = "radio" name = "difficulty" value = "0" id = "hard">Hard<br>-->
+				<form class="pure-form">
+				<label for="DifficultyDropdown">Difficulty</label>
+				<br>
+				<select id="DifficultyDropdown">
+					<option value = "5" id = "easy">Easy</option>
+					<option value = "3" id = "medium">Medium</option>
+					<option value = "0" id = "hard">Hard</option>
+				</select>
+				</form>
 			</span>
 		</div>
 		<table class = "center">

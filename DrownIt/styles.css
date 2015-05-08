@@ -12,8 +12,28 @@ table.center, table.center th, table.center td{
 }
 
 @media(max-width: 800px){
-	#backNav{
-		display:none;
+
+}
+
+@media(max-device-width: 480px){
+	#help{
+		display: none;
+	}
+	.piece{
+		width: 20px;
+		height: 20px;
+	}
+	#Dashboard{
+		display: none;
+	}
+	#MobileDashboard{
+		display: block !important;
+	}
+	#siteSections{
+		display: none;
+	}
+	#twitterLink{
+		display: none;
 	}
 }
 
