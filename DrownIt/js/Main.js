@@ -228,17 +228,35 @@
 		computerPlay(LEVELS_AHEAD);
 		
 		tryAgain();
-		if($("#easy").is(':selected'))
+		if($("#Dashboard").css('display') != "none")
 		{
-			MAX_MOVES = computerMoves.length + Number($("#easy").val());
+			if($("#easy").is(':selected'))
+			{
+				MAX_MOVES = computerMoves.length + Number($("#easy").val());
+			}
+			else if($("#medium").is(':selected'))
+			{
+				MAX_MOVES = computerMoves.length + Number($("#medium").val());
+			}
+			else if($("#hard").is(':selected'))
+			{
+				MAX_MOVES = computerMoves.length + Number($("#hard").val());
+			}
 		}
-		else if($("#medium").is(':selected'))
+		else
 		{
-			MAX_MOVES = computerMoves.length + Number($("#medium").val());
-		}
-		else if($("#hard").is(':selected'))
-		{
-			MAX_MOVES = computerMoves.length + Number($("#hard").val());
+			if($("#mobileEasy").is(':selected'))
+			{
+				MAX_MOVES = computerMoves.length + Number($("#mobileEasy").val());
+			}
+			else if($("#mobileMedium").is(':selected'))
+			{
+				MAX_MOVES = computerMoves.length + Number($("#mobileMedium").val());
+			}
+			else if($("#mobileHard").is(':selected'))
+			{
+				MAX_MOVES = computerMoves.length + Number($("#mobileHard").val());
+			}
 		}
 		$(".MAX_MOVES").text(MAX_MOVES);
 	}
