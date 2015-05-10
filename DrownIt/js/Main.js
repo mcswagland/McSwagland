@@ -1,14 +1,9 @@
 	var BOARD_SIZE = 12;
 	var NUM_COLORS = 6;
 	var MAX_MOVES = 100;//arbitrarily large number, for the purpose of the AI being able to run through the board in "any" number of moves
-	var EASY_MOVES = 25;
-	var MEDIUM_MOVES = 30;
-	var HARD_MOVES = 35;
-	var LEVELS_AHEAD = 4; //how far to look ahead in the game tree for the AI... DEPTH. The algorithm will have 5^LEVELS_AHEAD nodes at the lowest level
 	
 	//computer player variables
 	var computerMoves = [];
-	var numNodes = 0;
 	var index = 0;
 	var timerEvent;
 	var computerPlaying = false;
@@ -28,11 +23,14 @@
 	var board;
 	var originalBoard;
 	
+	var configs = new Array();
+	
 	$(window).load(function(){
+		initializeConfigs();
+		fillBoardTable();
 		initializeBoard();
-		openLoadingDialog();
-		setTimeout(newGame, 0);
-		setTimeout(closeLoadingDialog, 0);
+		initializeOriginalBoard();
+		newGame();
 		setTimeout(function(){$("#gameElements").css('display', 'inline');}, 0);
 		setTimeout(function(){$("#Dashboard").css("left", $("#board").position().left - $("#Dashboard").width() - $("#Dashboard").position().left - 50 + "px");}, 0);
 	});
@@ -134,9 +132,7 @@
 					},
 						"New Game": function () {
 						$(this).dialog('close');
-						openLoadingDialog();
-						setTimeout(newGame, 0);
-						setTimeout(closeLoadingDialog, 0);
+						newGame();
 					}
 				}
 			});
@@ -179,9 +175,7 @@
 	
 	$("#newGame").click(function(){
 		clearInterval(timerEvent);
-		openLoadingDialog();
-		setTimeout(newGame, 0);
-		setTimeout(closeLoadingDialog, 0);
+		newGame();
 	});
 	
 	$("#computerSolution").click(function(){
@@ -191,24 +185,6 @@
 	
 	$("#tryAgain").click(tryAgain);
 	
-	function initialGame()
-	{
-		numMoves = 0;
-		MAX_MOVES = 100;
-		computerMoves = [];
-		
-		computerPlaying = false;
-		
-		$("#board").empty();
-		pool = [];
-		createNewBoard();
-		initializeOriginalBoard();
-		updateBoard();
-		fillColors(board[0][0], {x: 0, y: 0});
-		visited = [];
-		lastMove = board[0][0];
-	}
-	
 	function newGame()
 	{	
 		numMoves = 0;
@@ -217,16 +193,12 @@
 		
 		computerPlaying = false;
 		
-		$("#board").empty();
-		pool = [];
-		createNewBoard();
-		initializeOriginalBoard();
+		//$("#board").empty();
+		var random = Math.floor(Math.random() * 100);
+		board = convertStringTo2DArray(configs[random].Gameboard);
 		updateBoard();
-		fillColors(board[0][0], {x: 0, y: 0});
-		visited = [];
-		lastMove = board[0][0];
-		computerPlay(LEVELS_AHEAD);
-		
+		copyBoardToOriginalBoard();
+		computerMoves = convertStringToArray(configs[random].Moves);
 		tryAgain();
 		if($("#Dashboard").css('display') != "none")
 		{
@@ -261,22 +233,51 @@
 		$(".MAX_MOVES").text(MAX_MOVES);
 	}
 	
-	function openLoadingDialog()
+	function convertArrayToString(array)
 	{
-		$("#loadingDialog").dialog({
-			closeOnEscape: false,
-			open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide();},
-			resizable: false,
-			modal: true, 
-			title: "Loading",
-			height: "auto",
-			width: 300
-		});
+		var result = "";
+		for(var i = 0; i < array.length; i++)
+		{
+			result += array[i].toString();
+		}
+		return result;
 	}
 	
-	function closeLoadingDialog()
+	function convert2DArrayToString(array)
 	{
-		$("#loadingDialog").dialog('close');
+		var result = "";
+		for(var i = 0; i < BOARD_SIZE; i++)
+		{
+			for(var j = 0; j < BOARD_SIZE; j++)
+			{
+				result += board[i][j].toString();
+			}
+		}
+		return result;
+	}
+	
+	function convertStringToArray(string)
+	{
+		var result = new Array();
+		for(var i = 0; i < string.length; i++)
+		{
+			result.push(string[i]);
+		}
+		return result;
+	}
+	
+	function convertStringTo2DArray(string)
+	{
+		var result = new Array(BOARD_SIZE);
+		for(var i = 0; i < BOARD_SIZE; i++)
+		{
+			result[i] = new Array(BOARD_SIZE);
+			for(var j = 0; j < BOARD_SIZE; j++)
+			{
+				result[i][j] = string[(i * BOARD_SIZE) + j]
+			}
+		}
+		return result;
 	}
 	
 	function openWinningDialog()
@@ -294,9 +295,7 @@
 				},
 					"New Game": function () {
 					$(this).dialog('close');
-					openLoadingDialog();
-					setTimeout(newGame, 0);
-					setTimeout(closeLoadingDialog, 0);
+					newGame();
 				}
 			}
 		});
@@ -321,45 +320,25 @@
 		lastMove = board[0][0];
 	}
 	
-	function createNewBoard()
-	{
-		for(var i = 0; i < BOARD_SIZE; i++)
-		{
-			for(var j = 0; j < BOARD_SIZE; j++)
-			{
-				board[i][j] = Math.floor(Math.random() * NUM_COLORS);
-			}
-		}
-		
-		for(var i = 0; i < BOARD_SIZE; i++)
-		{
-			$("#board").append("<tr id = 'row" + i + "'>");
-			var rowHtml = "";
-			for(var j = 0; j < BOARD_SIZE; j++)
-			{
-				rowHtml += "<td id = '" + i + "-" + j + "' class = 'piece'></td>";
-			}
-			$("#row" + i).append(rowHtml);
-		}
-	}
-	
 	function initializeBoard()
 	{
 		board = new Array(BOARD_SIZE);//[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]];
-		originalBoard = new Array(BOARD_SIZE);
 		for(var i = 0; i < BOARD_SIZE; i++)
 		{
 			board[i] = new Array(BOARD_SIZE);
-			originalBoard[i] = new Array(BOARD_SIZE);
-			for(var j = 0; j < BOARD_SIZE; j++)
-			{
-				board[i][j] = 0;
-				originalBoard[i][j] = 0;
-			}
 		}
 	}
 	
 	function initializeOriginalBoard()
+	{
+		originalBoard = new Array(BOARD_SIZE);
+		for(var i = 0; i < BOARD_SIZE; i++)
+		{
+			originalBoard[i] = new Array(BOARD_SIZE);
+		}
+	}
+	
+	function copyBoardToOriginalBoard()
 	{
 		for(var i = 0; i < BOARD_SIZE; i++)
 		{
@@ -378,6 +357,20 @@
 			{
 				board[i][j] = originalBoard[i][j];
 			}
+		}
+	}
+	
+	function fillBoardTable()
+	{
+		for(var i = 0; i < BOARD_SIZE; i++)
+		{
+			$("#board").append("<tr id = 'row" + i + "'>");
+			var rowHtml = "";
+			for(var j = 0; j < BOARD_SIZE; j++)
+			{
+				rowHtml += "<td id = '" + i + "-" + j + "' class = 'piece'></td>";
+			}
+			$("#row" + i).append(rowHtml);
 		}
 	}
 	
@@ -520,82 +513,6 @@
 		return result;
 	}
 	
-	/* AI Implementation */
-	
-	function computerPlay(levelsForward)
-	{
-		var computerMove;
-		while(!gameOver())
-		{
-			computerMove = lookAhead(0,levelsForward);
-			computerMoves.push(computerMove.move);
-			changePoolColor(computerMove.move);
-			fillColors(computerMove.move, {x: 0, y: 0});
-			numMoves++;
-			updateBoard();
-			visited = [];
-		}
-	}
-	
-	function lookAhead(level, finalLevel)
-	{
-		var play = new Object();
-		var lastComputerMove = board[0][0];
-		if(level == finalLevel)
-		{
-			play.score = pool.length;
-			play.level = level;
-			return play;
-		}
-		else
-		{	
-			var poolAtThisLevel = pool.slice(0);
-			var boardAtThisLevel = new Array();
-			for(var i = 0; i < BOARD_SIZE; i++)
-			{
-				boardAtThisLevel[i] = new Array();
-				boardAtThisLevel[i] = board[i].slice(0);
-			}
-			var maxScore = 0;
-			var bestMove = 0;
-			var highScoreLevel = finalLevel;
-			for(var i = 0; i < NUM_COLORS; i++)
-			{
-				if(i != lastComputerMove)
-				{
-					numNodes++;
-					changePoolColor(i);
-					fillColors(i, {x: 0, y: 0});
-					visited = [];
-					if(!gameOver())
-					{
-						play = lookAhead(level+1, finalLevel);
-					}
-					else
-					{
-						play.score = pool.length;
-						play.level = level;
-					}
-					if(play.score > maxScore || (play.score == maxScore && play.level < highScoreLevel))
-					{
-						maxScore = play.score;
-						highScoreLevel = play.level;
-						bestMove = i;
-					}
-					pool = poolAtThisLevel.slice(0);
-					for(var j = 0; j < BOARD_SIZE; j++)
-					{
-						board[j] = boardAtThisLevel[j].slice(0);
-					}
-				}
-			}
-			play.score = maxScore;
-			play.move = bestMove;
-			play.level = highScoreLevel;
-			return play;
-		}
-	}
-	
 	function showSolution()
 	{
 		index = 0;
@@ -628,9 +545,7 @@
 					},
 						"New Game": function () {
 						$(this).dialog('close');
-						openLoadingDialog();
-						setTimeout(newGame, 0);
-						setTimeout(closeLoadingDialog, 0);
+						newGame();
 					}
 				}
 			});
