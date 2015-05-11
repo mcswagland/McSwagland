@@ -193,7 +193,6 @@
 		
 		computerPlaying = false;
 		
-		//$("#board").empty();
 		var random = Math.floor(Math.random() * 100);
 		board = convertStringTo2DArray(configs[random].Gameboard);
 		updateBoard();
@@ -250,7 +249,7 @@
 		{
 			for(var j = 0; j < BOARD_SIZE; j++)
 			{
-				result += board[i][j].toString();
+				result += array[i][j].toString();
 			}
 		}
 		return result;
