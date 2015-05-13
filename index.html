@@ -11,7 +11,7 @@
 <title>McSwagland</title>
 </head>
 <body>
-	<div class = "background-image visible"></div>
+	<div class = "background-image visible" id = "backgroundImage"></div>
 	<div class="pure-menu pure-menu-open pure-menu-horizontal">
 		<a class="pure-menu-heading" href = "#">McSwagland</a>
 	
@@ -23,3 +23,34 @@
 	<a target = "_blank" href = "https://twitter.com/brockoli_93"><img src = "images/twitter-logo.jpg" style = "width: 25px; height: 25px; position: absolute; top: 5px; right: 10px;" /></a>
 	<h1 style = "text-align: center;">Welcome to McSwagland</h1>
 </body>
+<script>
+	$(window).load(function(){
+		var date = new Date();
+		var day = date.getDay();
+		switch(day){
+			case 0:
+				$("#backgroundImage").addClass('sunday');
+				break;
+			case 1:
+				$("#backgroundImage").addClass('monday');
+				break;
+			case 2:
+				$("#backgroundImage").addClass('tuesday');
+				break;
+			case 3:
+				$("#backgroundImage").addClass('wednesday');
+				break;
+			case 4:
+				$("#backgroundImage").addClass('thursday');
+				break;
+			case 5:
+				$("#backgroundImage").addClass('friday');
+				break;
+			case 6:
+				$("#backgroundImage").addClass('saturday');
+				break;
+			default:
+				$("#backgroundImage").addClass('sunday');
+		}
+	});
+</script>

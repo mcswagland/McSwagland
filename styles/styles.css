@@ -27,8 +27,35 @@ html,body{
   100% { opacity: 1; }
 }
 
+.sunday{
+	background: url('../images/mountain.jpg') no-repeat center center fixed;
+}
+
+.monday{
+	background: url('../images/clouds.jpg') no-repeat center center fixed;
+}
+
+.tuesday{
+	background: url('../images/waterfall.jpg') no-repeat center center fixed;
+}
+
+.wednesday{
+	background: url('../images/waterSunset.jpg') no-repeat center center fixed;
+}
+
+.thursday{
+	background: url('../images/mountainStars.jpg') no-repeat center center fixed;
+}
+
+.friday{
+	background: url('../images/sunrays.jpg') no-repeat center center fixed;
+}
+
+.saturday{
+	background: url('../images/mountainCountry.jpg') no-repeat center center fixed;
+}
+
 .background-image {
-  background: url('../images/mountain.jpg') no-repeat center center fixed;
   z-index: -1;
   -webkit-background-size: cover;
   -moz-background-size: cover;
