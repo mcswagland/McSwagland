@@ -9,6 +9,5 @@ $('#cameraView').change(function(){
 
 function updateCamera()
 {
-	debugger;
 	$("#picHolder").attr('src',"http://www.royalcaribbean.com/content/shared_assets/webcam/AL/Gallery_" + $('#cameraView').val() + ".jpg" + "?" + new Date().getTime());
 }
