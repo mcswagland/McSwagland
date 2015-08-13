@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <head>
-<link rel="stylesheet" type="text/css" href="styles.css">
 <link rel="stylesheet" type="text/css" href="../jQuery/jquery-ui-1.11.2.custom/jquery-ui.min.css">
-<link rel="stylesheet" type="text/css" href="../styles/pure-release-0.5.0/pure-min.css">
+<link rel="stylesheet" href="../styles/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="styles.css">
 <script src="../jQuery/jquery-1.11.1.min.js"></script>
 <script src="../jQuery/jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
+<script src="../styles/bootstrap/js/bootstrap.min.js"></script>
 <title>Drown It</title>
 <meta charset = "UTF-8">
 <meta name = "description" content = "Drown It, a clone of the popular game Flood It">
@@ -13,41 +14,50 @@
 <meta name = "viewport" content = "width = device-width, initial-scale = 1.0"/>
 </head>
 <body>
-	<div class="pure-menu pure-menu-open pure-menu-horizontal">
-		<a class="pure-menu-heading" href = "../">McSwagland</a>
-	
-		<ul id="siteSections">
-			<li><a href="../">Home</a></li>
-			<li class="pure-menu-selected"><a href="#">Drown It</a></li>
-			<li><a href="../CruiseCams/">Cruise Cams</a></li>
-		</ul>
-	</div>
-	<a target = "_blank" id="twitterLink" href = "https://twitter.com/brockoli_93"><img src = "../images/twitter-logo.jpg" style = "width: 25px; height: 25px; position: absolute; top: 5px; right: 10px;" /></a>
-	<!--Goudy Stout is another possible font-->
-	<div id = "MobileDashboard" class="pure-g" style = "display: none; text-align:center;">
-		<div class="pure-u-1-2">
-		<span>Moves: <span class="moves">0</span>/<span class="MAX_MOVES">25</span></span>
+	<nav class = "navbar navbar-default header">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
+		  data-target="#siteSections" aria-expanded="false">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="../">McSwagland</a>
 		</div>
-		<div class="pure-u-1-2">
+		<div class="collapse navbar-collapse" id="siteSections">
+			<ul class="nav navbar-nav">
+				<li><a href="../">Home</a></li>
+				<li class="active"><a href="../DrownIt/">Drown It</a></li>
+				<li><a target = "_blank" href = "https://twitter.com/brockoli_93">Twitter</a></li>
+			</ul>
+		</div>
+	</nav>
+	<!--Goudy Stout is another possible font-->
+	<div id = "MobileDashboard" class = "container" style = "display: none; text-align:center;">
+		<div class="row">
+			<div class="col-xs-6">
+			<span>Moves: <span class="moves">0</span>/<span class="MAX_MOVES">25</span></span>
+			</div>
+			<div class="col-xs-6">
 
-			<select id="MobileDifficultyDropdown">
-				<option value = "5" id = "mobileEasy">Easy</option>
-				<option value = "3" id = "mobileMedium">Medium</option>
-				<option value = "0" id = "mobileHard">Hard</option>
-			</select>
+				<select id="MobileDifficultyDropdown">
+					<option value = "5" id = "mobileEasy">Easy</option>
+					<option value = "3" id = "mobileMedium">Medium</option>
+					<option value = "0" id = "mobileHard">Hard</option>
+				</select>
 
+			</div>
 		</div>
 	</div>
 	<br>
 	<div id = "gameElements" style = "display:none;">
-		<span style = "position:absolute; right: 15px; top: 35px;" id = "help">Having trouble?<br><a target = "_blank" href = "https://www.youtube.com/watch?v=r0bupVtxIUA">How To Play</a></span>
 		<div style = "position: absolute" id = "Dashboard">
 			<span style = "font-family: magneto; font-size: 2em; text-align: center;" id = "MoveCounter"><u>Moves</u><br><span class = "moves">0</span>/<span class = "MAX_MOVES">25</span></span>
 			<br>
 			<br>
 			<br>
 			<span style = "font-family: magneto;" id = "difficulty">
-				<form class="pure-form">
 				<label for="DifficultyDropdown">Difficulty</label>
 				<br>
 				<select id="DifficultyDropdown">
@@ -55,7 +65,6 @@
 					<option value = "3" id = "medium">Medium</option>
 					<option value = "0" id = "hard">Hard</option>
 				</select>
-				</form>
 			</span>
 		</div>
 		<table class = "center">
@@ -80,6 +89,8 @@
 			<button id = "newGame" class = "styled-button-8">New Game</button>
 			<button id = "tryAgain" class = "styled-button-8">Try Again</button>
 			<button id = "computerSolution" class = "styled-button-8">Show Solution</button>
+			<br><br>
+			<span class="center" id = "help">Having trouble?<br><a target = "_blank" href = "https://www.youtube.com/watch?v=r0bupVtxIUA">How To Play</a></span>
 		</div>
 	</div>
 	<div id = "winningDialog" style = "display: none;"><p style = "text-align:center">You won in <span id="winningMoves"></span> moves.</p></div>

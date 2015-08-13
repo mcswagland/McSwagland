@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <head>
-<link rel="stylesheet" href="styles/pure-release-0.5.0/pure-min.css">
+<link rel="stylesheet" href="styles/bootstrap/css/bootstrap.min.css">
 <link rel = "stylesheet" href = "styles/styles.css">
 <script src="jQuery/jquery-1.11.1.min.js"></script>
+<script src="styles/bootstrap/js/bootstrap.min.js"></script>
 <meta charset = "UTF-8">
 <meta name = "description" content = "Games by Brock McFarland">
 <meta name = "keywords" content = "brock mcfarland, mcswagland, game development, programming">
@@ -12,16 +13,25 @@
 </head>
 <body>
 	<div class = "background-image visible" id = "backgroundImage"></div>
-	<div class="pure-menu pure-menu-open pure-menu-horizontal">
-		<a class="pure-menu-heading" href = "#">McSwagland</a>
-	
-		<ul>
-			<li class="pure-menu-selected"><a href="#">Home</a></li>
-			<li><a href="DrownIt/">Drown It</a></li>
-			<li><a href="CruiseCams/">Cruise Cams</a></li>
-		</ul>
-	</div>
-	<a target = "_blank" href = "https://twitter.com/brockoli_93"><img src = "images/twitter-logo.jpg" style = "width: 25px; height: 25px; position: absolute; top: 5px; right: 10px;" /></a>
+	<nav class = "navbar navbar-default header">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
+		  data-target="#siteSections" aria-expanded="false">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="#">McSwagland</a>
+		</div>
+		<div class="collapse navbar-collapse" id="siteSections">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="DrownIt/">Drown It</a></li>
+				<li><a target = "_blank" href = "https://twitter.com/brockoli_93">Twitter</a></li>
+			</ul>
+		</div>
+	</nav>
 	<h1 style = "text-align: center;">Welcome to McSwagland</h1>
 </body>
 <script>
